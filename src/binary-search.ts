@@ -1,3 +1,7 @@
+// WARNING: Sorted Array Only
+// O(logN)
+// Continuously split the sequence in half and check the part that meets the condition
+
 const binarySearch = (arr: number[], value: number) => {
   let low = 0;
   let high = arr.length;

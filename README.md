@@ -1,4 +1,5 @@
-##Goal
+## Goal
+
 This repository contains the implementation of the data structures that are the basis of computer science with typescript. The goal is to regain the analytical thinking that the bootcamp culture has made us forget and to change our perspective on problem solving. Also, this repo does not specifically try to implement methods like "separation of concerns" or "DRY".
 
 **Clone:**

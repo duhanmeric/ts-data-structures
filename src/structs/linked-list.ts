@@ -1,9 +1,4 @@
-const util = require("util");
-
-type Node<T> = {
-  value: T;
-  next?: Node<T>;
-};
+import { logDeep } from "../helpers/logDeep";
 
 interface ILinkedList<T> {
   length: number;
@@ -183,5 +178,5 @@ list.remove("C");
 list.removeAt(2);
 list.insertAt("G", 3);
 const val = list.get(1);
-console.log(util.inspect(list, false, null, true));
+logDeep(list);
 console.log("Aranan deger: ", val);

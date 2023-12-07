@@ -1,9 +1,4 @@
-const util = require("util");
-
-type Node<T> = {
-  value: T;
-  next?: Node<T>;
-};
+import { logDeep } from "../helpers/logDeep";
 
 interface IQueue<T> {
   length: number;
@@ -12,7 +7,7 @@ interface IQueue<T> {
   dequeueBy(count: number): void;
 }
 
-class Queue<T> implements IQueue<T> {
+export default class Queue<T> implements IQueue<T> {
   public length: number;
   private head?: Node<T>;
   private tail?: Node<T>;
@@ -76,5 +71,5 @@ class Queue<T> implements IQueue<T> {
 const qu = new Queue<string>();
 qu.enqueue("A", "B", "C", "D", "E", "F", "G", "H", "I", "J");
 qu.dequeue();
-qu.dequeueBy(6);
-console.log(util.inspect(qu, false, null, true));
+qu.dequeueBy(2);
+logDeep(qu);

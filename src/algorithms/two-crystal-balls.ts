@@ -1,6 +1,8 @@
 // bigO = O(sqrt(N))
 
-const twoCrystalBalls = (breaks: boolean[]) => {
+export const twoCrystalBalls = (breaks: boolean[]): number => {
+  if (breaks[0]) return 0;
+
   // find jump amount
   const jmpAmount = Math.floor(Math.sqrt(breaks.length));
 
@@ -14,7 +16,7 @@ const twoCrystalBalls = (breaks: boolean[]) => {
   }
 
   // Rollback from the last checkpoint as far as jmpAmount
-  i -= jmpAmount;
+  i = Math.max(i - jmpAmount, 0);
 
   // Finding the point where the last ball will be thrown without breaking
   // Will now only go as far as jmpAmount from the last checkpoint (because it should be broken in this range)
@@ -24,8 +26,6 @@ const twoCrystalBalls = (breaks: boolean[]) => {
       return i;
     }
   }
-};
 
-const arr = Array(10).fill(false).concat(Array(10).fill(true));
-const result = twoCrystalBalls(arr);
-console.log(result);
+  return -1;
+};

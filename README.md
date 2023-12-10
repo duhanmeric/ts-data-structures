@@ -11,14 +11,16 @@ git clone https://github.com/duhanmeric/ts-data-structures.git
 bun install
 ```
 
-**Run:**
+**Running in development:**
 
 ```bash
 bun run dev <file_path_here>
+e.g: bun run /structs/queue.ts
 ```
 
-**Example:**
+**Running in production:**
 
 ```bash
-bun run watch /structs/queue.ts
+bun start <file_path_here>
+e.g: bun start /algorithms/queue.ts
 ```

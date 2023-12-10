@@ -1,7 +1,4 @@
-import { logDeep } from "../helpers/logDeep";
-
 interface ILinkedList<T> {
-  length: number;
   append(value: T): void;
   prepend(value: T): void;
   insertAt(value: T, index: number): void;
@@ -11,8 +8,8 @@ interface ILinkedList<T> {
   get(index: number): T | undefined;
 }
 
-class LinkedList<T> implements ILinkedList<T> {
-  public length = 0;
+export class LinkedList<T> implements ILinkedList<T> {
+  private length = 0;
   private head?: Node<T>;
   private tail?: Node<T>;
 
@@ -36,7 +33,7 @@ class LinkedList<T> implements ILinkedList<T> {
 
   // O(1)
   // add to the start of the list
-  prepend(value: T) {
+  prepend(value: T): void {
     const node = { value } as Node<T>;
     this.length++;
     if (!this.head) {
@@ -104,16 +101,20 @@ class LinkedList<T> implements ILinkedList<T> {
         const toBeRemoved = helperPointer.next;
         helperPointer.next = toBeRemoved.next;
         toBeRemoved.next = undefined;
+        this.length--;
         break;
       }
       helperPointer = helperPointer.next;
     }
-    this.length--;
   }
 
   // O(N)
   removeAt(index: number) {
     let helperPointer = this.head;
+
+    if (index >= this.length) {
+      throw new Error("LinkedListIndexOutOfBoundsException");
+    }
 
     if (!this.head) {
       return;
@@ -121,6 +122,7 @@ class LinkedList<T> implements ILinkedList<T> {
 
     if (index === 0) {
       this.head = this.head.next;
+      this.length--;
       return;
     }
 
@@ -128,14 +130,17 @@ class LinkedList<T> implements ILinkedList<T> {
     while (i < this.length && helperPointer && helperPointer.next) {
       if (i === index - 1) {
         const toBeRemoved = helperPointer.next;
+        if (toBeRemoved === this.tail) {
+          this.tail = helperPointer;
+        }
         helperPointer.next = toBeRemoved.next;
         toBeRemoved.next = undefined;
+        this.length--;
+        break;
       }
       helperPointer = helperPointer.next;
       i++;
     }
-
-    this.length--;
   }
 
   get(index: number): T | undefined {
@@ -166,17 +171,3 @@ class LinkedList<T> implements ILinkedList<T> {
     return this.length;
   }
 }
-
-const list = new LinkedList();
-list.prepend("A");
-list.append("B");
-list.append("C");
-list.append("D");
-list.append("E");
-list.append("F");
-list.remove("C");
-list.removeAt(2);
-list.insertAt("G", 3);
-const val = list.get(1);
-logDeep(list);
-console.log("Aranan deger: ", val);

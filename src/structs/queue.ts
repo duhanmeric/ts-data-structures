@@ -1,13 +1,12 @@
-import { logDeep } from "../helpers/logDeep";
-
 interface IQueue<T> {
   length: number;
   enqueue(...args: T[]): void;
   dequeue(): void;
   dequeueBy(count: number): void;
+  getHead(): T | undefined;
 }
 
-export default class Queue<T> implements IQueue<T> {
+export class Queue<T> implements IQueue<T> {
   public length: number;
   private head?: Node<T>;
   private tail?: Node<T>;
@@ -66,10 +65,8 @@ export default class Queue<T> implements IQueue<T> {
       i++;
     }
   }
-}
 
-const qu = new Queue<string>();
-qu.enqueue("A", "B", "C", "D", "E", "F", "G", "H", "I", "J");
-qu.dequeue();
-qu.dequeueBy(2);
-logDeep(qu);
+  getHead(): T | undefined {
+    return this.head?.value;
+  }
+}

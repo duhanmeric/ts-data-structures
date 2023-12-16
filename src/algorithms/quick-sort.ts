@@ -9,12 +9,12 @@ export const quickSort = (arr: number[], lo: number, hi: number): void => {
 
 // returns location of the pivot
 const partition = (arr: number[], lo: number, hi: number): number => {
-  let pivot = arr[hi];
+  const pivot = arr[hi];
 
   let j = lo - 1;
 
   for (let i = lo; i < hi; i++) {
-    if (arr[i] < pivot) {
+    if (arr[i] <= pivot) {
       j++;
       const tmp = arr[i];
       arr[i] = arr[j];
@@ -23,9 +23,8 @@ const partition = (arr: number[], lo: number, hi: number): number => {
   }
 
   j++;
-  const tmp = arr[j];
-  arr[j] = arr[hi];
-  arr[hi] = tmp;
+  arr[hi] = arr[j];
+  arr[j] = pivot;
 
   return j;
 };

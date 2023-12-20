@@ -25,4 +25,8 @@ describe("tree", () => {
   test("postorder", () => {
     expect(tree.traverse("post")).toEqual([3, 4, 1, 2, 0]);
   });
+  test("breadth first search", () => {
+    expect(tree.breadthFirstSearch(17)).toBeFalse();
+    expect(tree.breadthFirstSearch(3)).toBeTrue();
+  });
 });

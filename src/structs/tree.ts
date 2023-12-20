@@ -45,6 +45,28 @@ export class Tree<T> {
     }
   }
 
+  breadthFirstSearch(value: T): boolean {
+    const q = [this.root];
+
+    while (q.length > 0) {
+      const curr = q.shift();
+
+      if (curr?.value === value) {
+        return true;
+      }
+
+      if (curr?.left) {
+        q.push(curr.left);
+      }
+
+      if (curr?.right) {
+        q.push(curr.right);
+      }
+    }
+
+    return false;
+  }
+
   traverse(type: TraverseType) {
     const result: T[] = [];
     if (type === "pre") {

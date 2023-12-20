@@ -4,6 +4,8 @@ type Node<T> = {
   prev?: Node<T>;
 };
 
+type TraverseType = "pre" | "in" | "post";
+
 interface ILinkedList<T> {
   append(value: T): void;
   prepend(value: T): void;

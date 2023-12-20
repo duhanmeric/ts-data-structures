@@ -1,6 +1,4 @@
-import { logDeep } from "../helpers/logDeep";
-
-class TreeNode<T> {
+export class TreeNode<T> {
   value: T;
   left?: TreeNode<T>;
   right?: TreeNode<T>;
@@ -14,7 +12,7 @@ class TreeNode<T> {
   }
 }
 
-class Tree<T> {
+export class Tree<T> {
   public root?: TreeNode<T>;
 
   constructor() {}
@@ -59,22 +57,3 @@ class Tree<T> {
     return result;
   }
 }
-
-const tree = new Tree<number>();
-const root = new TreeNode(0);
-tree.setRoot(root);
-
-const a = new TreeNode(1);
-const b = new TreeNode(2);
-const c = new TreeNode(3);
-const d = new TreeNode(4);
-root.addChild(a, "left");
-root.addChild(b, "right");
-a.addChild(c, "left");
-a.addChild(d, "right");
-
-const preOrderResult = tree.traverse("pre");
-const inOrderResult = tree.traverse("in");
-const postOrderWalk = tree.traverse("post");
-
-logDeep(tree);

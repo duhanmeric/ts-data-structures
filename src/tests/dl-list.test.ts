@@ -1,38 +1,27 @@
 import { describe, expect, test } from "bun:test";
-import { LinkedList } from "./linked-list";
+import { DoublyLinkedList } from "../structs/dl-list";
 
-describe("linked list append method", () => {
+describe("doubly linked list", () => {
   test("append 1 element", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     expect(list.getLength()).toBe(1);
     expect(list.get(0)).toBe("A");
   });
 
-  test("append more than 1 element", () => {
-    const list = new LinkedList<string>();
+  test("append multiple element", () => {
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
-    expect(list.getLength()).toBe(2);
-    expect(list.get(0)).toBe("A");
-    expect(list.get(1)).toBe("B");
-  });
-
-  test("appends different data types", () => {
-    const list = new LinkedList();
-    list.append("A");
-    list.append(1);
-    list.append(true);
+    list.append("C");
     expect(list.getLength()).toBe(3);
     expect(list.get(0)).toBe("A");
-    expect(list.get(1)).toBe(1);
-    expect(list.get(2)).toBe(true);
+    expect(list.get(1)).toBe("B");
+    expect(list.get(2)).toBe("C");
   });
-});
 
-describe("linked list prepend method", () => {
   test("prepend 3 times and append 1 time", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.prepend("A");
     list.prepend("B");
     list.prepend("C");
@@ -42,18 +31,16 @@ describe("linked list prepend method", () => {
     expect(list.get(2)).toBe("A");
     expect(list.get(3)).toBe("D");
   });
-});
 
-describe("linked list insertAt method", () => {
   test("insert at the start", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.insertAt("A", 0);
     expect(list.getLength()).toBe(1);
     expect(list.get(0)).toBe("A");
   });
 
   test("insert at the middle", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
@@ -63,7 +50,7 @@ describe("linked list insertAt method", () => {
   });
 
   test("insert at the end", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
@@ -74,17 +61,15 @@ describe("linked list insertAt method", () => {
   });
 
   test("insert out ouf bounds", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     expect(() => list.insertAt("B", 7)).toThrow(
       "LinkedListIndexOutOfBoundsException"
     );
   });
-});
 
-describe("linked list remove method", () => {
   test("remove existing element", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
@@ -94,18 +79,16 @@ describe("linked list remove method", () => {
   });
 
   test("remove non-existing element", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
     list.remove("D");
     expect(list.getLength()).toBe(3);
   });
-});
 
-describe("linked list removeAt method", () => {
-  test("remove from start", () => {
-    const list = new LinkedList<string>();
+  test("removeAt from start", () => {
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
@@ -114,8 +97,8 @@ describe("linked list removeAt method", () => {
     expect(list.get(0)).toBe("B");
   });
 
-  test("remove from middle", () => {
-    const list = new LinkedList<string>();
+  test("removeAt from middle", () => {
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
@@ -124,8 +107,18 @@ describe("linked list removeAt method", () => {
     expect(list.get(1)).toBe("C");
   });
 
-  test("remove from end", () => {
-    const list = new LinkedList<string>();
+  test("removeAt from middle", () => {
+    const list = new DoublyLinkedList<string>();
+    list.append("A");
+    list.append("B");
+    list.append("C");
+    list.removeAt(1);
+    expect(list.getLength()).toBe(2);
+    expect(list.get(1)).toBe("C");
+  });
+
+  test("removeAt from end", () => {
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");
@@ -135,7 +128,7 @@ describe("linked list removeAt method", () => {
   });
 
   test("remove out of bounds", () => {
-    const list = new LinkedList<string>();
+    const list = new DoublyLinkedList<string>();
     list.append("A");
     list.append("B");
     list.append("C");

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { linearSearch } from "./linear-search";
+import { linearSearch } from "../algorithms/linear-search";
 
 describe("linear search", () => {
   test("is in the array", () => {

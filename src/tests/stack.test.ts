@@ -1,5 +1,5 @@
 import { describe, test, expect } from "bun:test";
-import { Stack } from "./stack";
+import { Stack } from "../structs/stack";
 
 describe("stack", () => {
   test("push", () => {

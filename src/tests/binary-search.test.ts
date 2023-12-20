@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { binarySearch } from "./binary-search";
+import { binarySearch } from "../algorithms/binary-search";
 
 describe("binary search", () => {
   test("return true if element is in the given array", () => {

@@ -1,5 +1,5 @@
 import { describe, test, expect } from "bun:test";
-import { bubbleSort } from "./bubble-sort";
+import { bubbleSort } from "../algorithms/bubble-sort";
 
 describe("bubble sort", () => {
   test("handle sort", () => {

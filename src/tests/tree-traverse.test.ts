@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, test } from "bun:test";
-import { Tree, TreeNode } from "./tree";
+import { Tree, TreeNode } from "../structs/tree";
 
 describe("tree", () => {
   let tree = new Tree<number>();

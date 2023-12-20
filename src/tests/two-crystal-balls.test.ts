@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { twoCrystalBalls } from "./two-crystal-balls";
+import { twoCrystalBalls } from "../algorithms/two-crystal-balls";
 
 describe("two crystal balls", () => {
   test("should greater or equal than 0", () => {

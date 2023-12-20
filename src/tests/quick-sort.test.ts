@@ -1,5 +1,5 @@
 import { expect, test, describe } from "bun:test";
-import { quickSort } from "./quick-sort";
+import { quickSort } from "../algorithms/quick-sort";
 
 describe("quick sort", () => {
   test("regular sort", () => {

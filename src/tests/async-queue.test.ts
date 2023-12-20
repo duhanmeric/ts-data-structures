@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { AsyncQueue } from "./async-queue";
+import { AsyncQueue } from "../algorithms/async-queue";
 
 async function makeAsyncRequest(
   data: string,

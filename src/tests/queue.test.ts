@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Queue } from "./queue";
+import { Queue } from "../structs/queue";
 
 describe("queue", () => {
   test("enqueue", () => {

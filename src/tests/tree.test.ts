@@ -54,4 +54,22 @@ describe("tree", () => {
     secondTreeObj.root!.left!.value = 1124;
     expect(compareTrees(tree, secondTreeObj)).toBeFalse();
   });
+
+  test("compare empty trees", () => {
+    const firstTree = {} as TreeNodeObject<number>;
+    const secondTree = {} as TreeNodeObject<number>;
+
+    const firstTreeObj = new Tree(firstTree);
+    const secondTreeObj = new Tree(secondTree);
+    expect(compareTrees(firstTreeObj, secondTreeObj)).toBeTrue();
+  });
+
+  test("compare 1 empty and another tree", () => {
+    const firstTree = { value: 1 } as TreeNodeObject<number>;
+    const secondTree = {} as TreeNodeObject<number>;
+
+    const firstTreeObj = new Tree(firstTree);
+    const secondTreeObj = new Tree(secondTree);
+    expect(compareTrees(firstTreeObj, secondTreeObj)).toBeFalse();
+  });
 });

@@ -6,6 +6,12 @@ type Node<T> = {
 
 type TraverseType = "pre" | "in" | "post";
 
+interface TreeNodeObject<T> {
+  value: T;
+  left?: TreeNodeObject<T>;
+  right?: TreeNodeObject<T>;
+}
+
 interface ILinkedList<T> {
   append(value: T): void;
   prepend(value: T): void;

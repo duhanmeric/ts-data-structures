@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, test } from "bun:test";
 import { Tree, TreeNode } from "../structs/tree";
 import { compareTrees } from "../algorithms/compare-bt";
-import { bstFind, bstInsert } from "../algorithms/bst";
+import { bstDelete, bstFind, bstInsert } from "../algorithms/bst";
 
 describe("tree", () => {
   let tree: Tree<number>;
@@ -128,5 +128,51 @@ describe("tree", () => {
     expect(BST.root!.left!.right!.value).toBe(12);
     expect(BST.root!.right!.left!.value).toBe(17);
     expect(BST.root!.right!.right!.value).toBe(25);
+  });
+
+  test("BST - depth first leaf deletion", () => {
+    const BST = new Tree(new TreeNode(15, new TreeNode(10), new TreeNode(20)));
+    bstDelete(BST.root, 20);
+    expect(BST.root!.right).toBeUndefined();
+  });
+
+  test("BST - depth first deletion a node with one child correctly", () => {
+    const BST = new Tree(
+      new TreeNode(15, new TreeNode(10, new TreeNode(5)), new TreeNode(20))
+    );
+    bstDelete(BST.root, 10);
+    expect(BST.root!.left!.value).toBe(5);
+  });
+
+  test("BST - depth first deletion should delete a node with two children correctly", () => {
+    const BST = new Tree(
+      new TreeNode(
+        15,
+        new TreeNode(10),
+        new TreeNode(20, new TreeNode(17), new TreeNode(25))
+      )
+    );
+    bstDelete(BST.root, 20);
+    expect(BST.root!.right!.value).not.toBe(20);
+    expect([17, 25]).toContain(BST.root!.right!.value);
+  });
+
+  test("BST - depth first deletion of the root node correctly when it has no children", () => {
+    const BST = new Tree(new TreeNode(15));
+    BST.root = bstDelete(BST.root, 15);
+    expect(BST.root).toBeUndefined();
+  });
+
+  test("BST - depth first deletion should delete the root node correctly when it has one child", () => {
+    const BST = new Tree(new TreeNode(15, new TreeNode(10)));
+    BST.root = bstDelete(BST.root, 15);
+    expect(BST.root!.value).toBe(10);
+  });
+
+  test("should delete the root node correctly when it has two children", () => {
+    const BST = new Tree(new TreeNode(15, new TreeNode(10), new TreeNode(20)));
+    BST.root = bstDelete(BST.root, 15);
+    expect(BST.root!.value).not.toBe(15);
+    expect([10, 20]).toContain(BST.root!.value);
   });
 });

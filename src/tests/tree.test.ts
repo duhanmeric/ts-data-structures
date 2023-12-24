@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, test } from "bun:test";
-import { Tree } from "../structs/tree";
+import { Tree, TreeNode } from "../structs/tree";
 import { compareTrees } from "../algorithms/compare-bt";
-import { btsFind } from "../algorithms/bst";
+import { bstFind, bstInsert } from "../algorithms/bst";
 
 describe("tree", () => {
   let tree: Tree<number>;
@@ -90,8 +90,43 @@ describe("tree", () => {
     };
 
     const BSTObj = new Tree<number>(BST);
-    expect(btsFind(BSTObj.root, 5)).toBeFalse();
-    expect(btsFind(BSTObj.root, 13)).toBeTrue();
-    expect(btsFind(BSTObj.root, 18)).toBeTrue();
+    expect(bstFind(BSTObj.root, 5)).toBeFalse();
+    expect(bstFind(BSTObj.root, 13)).toBeTrue();
+    expect(bstFind(BSTObj.root, 18)).toBeTrue();
+  });
+
+  test("BST - depth first empty tree insert", () => {
+    const BST = new Tree<number>();
+    BST.root = bstInsert(BST.root, 10);
+    expect(BST.root?.value).toBe(10);
+  });
+
+  test("BST - depth first insert less than the root", () => {
+    const BST = new Tree(new TreeNode(15));
+    bstInsert(BST.root, 10);
+    expect(BST.root?.left?.value).toBe(10);
+  });
+
+  test("BST - depth first insert greater than the root", () => {
+    const BST = new Tree(new TreeNode(15));
+    bstInsert(BST.root, 20);
+    expect(BST.root?.right?.value).toBe(20);
+  });
+
+  test("BST - depth first insert greater than the root", () => {
+    const BST = new Tree(new TreeNode(15));
+    bstInsert(BST.root, 10);
+    bstInsert(BST.root, 20);
+    bstInsert(BST.root, 5);
+    bstInsert(BST.root, 12);
+    bstInsert(BST.root, 17);
+    bstInsert(BST.root, 25);
+
+    expect(BST.root!.left!.value).toBe(10);
+    expect(BST.root!.right!.value).toBe(20);
+    expect(BST.root!.left!.left!.value).toBe(5);
+    expect(BST.root!.left!.right!.value).toBe(12);
+    expect(BST.root!.right!.left!.value).toBe(17);
+    expect(BST.root!.right!.right!.value).toBe(25);
   });
 });

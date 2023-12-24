@@ -1,4 +1,7 @@
-export const btsFind = <T>(
+import { logDeep } from "../helpers/logDeep";
+import { Tree, TreeNode } from "../structs/tree";
+
+export const bstFind = <T>(
   node: TreeNodeObject<T> | undefined,
   value: T
 ): boolean => {
@@ -7,13 +10,29 @@ export const btsFind = <T>(
   }
 
   if (value === node.value) {
-    console.log("FOUND", node.value);
     return true;
   }
 
   if (value <= node.value) {
-    return btsFind(node.left, value);
+    return bstFind(node.left, value);
   } else {
-    return btsFind(node.right, value);
+    return bstFind(node.right, value);
   }
+};
+
+export const bstInsert = <T>(
+  node: TreeNodeObject<T> | undefined,
+  newNode: T
+): TreeNodeObject<T> | undefined => {
+  if (!node) {
+    return new TreeNode(newNode);
+  }
+
+  if (newNode <= node.value) {
+    node.left = bstInsert(node.left, newNode);
+  } else {
+    node.right = bstInsert(node.right, newNode);
+  }
+
+  return node;
 };

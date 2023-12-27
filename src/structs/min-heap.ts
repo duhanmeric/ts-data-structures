@@ -54,15 +54,14 @@ export class MinHeap {
       return;
     }
 
-    const parentIndex = this.getParent(i); // 1
-    const parentValue = this.data[parentIndex]; // 5
+    const parentIndex = this.getParent(i);
+    const parentValue = this.data[parentIndex];
 
-    const itemValue = this.data[i]; // 2
+    const itemValue = this.data[i];
 
     if (parentValue > itemValue) {
-      // 5 > 2 yes
-      this.data[i] = parentValue; // yeni eklenen data 5 oldu
-      this.data[parentIndex] = itemValue; // parent ise yeni eklenen data oldu
+      this.data[i] = parentValue;
+      this.data[parentIndex] = itemValue;
       this.heapifyUp(parentIndex);
     }
   }

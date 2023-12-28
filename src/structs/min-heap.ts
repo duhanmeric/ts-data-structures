@@ -1,6 +1,6 @@
 export class MinHeap {
   public length: number;
-  private data: number[];
+  public data: number[];
 
   constructor() {
     this.length = 0;
@@ -20,61 +20,58 @@ export class MinHeap {
 
     const out = this.data[0];
     this.data[0] = this.data[this.length - 1];
+    this.data.pop();
     this.length--;
-
-    if (this.length > 0) {
-      this.heapifyDown(0);
-    }
-
+    this.heapifyDown(0);
     return out;
   }
 
-  private heapifyDown(i: number) {
-    const lChild = this.getLeftChild(i);
-    const rChild = this.getRightChild(i);
+  private heapifyDown(idx: number): void {
+    const lIdx = this.getLeftChildIndex(idx);
+    const rIdx = this.getRightChildIndex(idx);
+    let smallest = idx;
 
-    let smallest = i;
-
-    if (lChild < this.length && this.data[lChild] < this.data[smallest]) {
-      smallest = lChild;
+    if (lIdx < this.length && this.data[lIdx] < this.data[smallest]) {
+      smallest = lIdx;
     }
 
-    if (rChild < this.length && this.data[rChild] < this.data[smallest]) {
-      smallest = rChild;
+    if (rIdx < this.length && this.data[rIdx] < this.data[smallest]) {
+      smallest = rIdx;
     }
 
-    if (smallest !== i) {
-      [this.data[i], this.data[smallest]] = [this.data[smallest], this.data[i]];
+    if (smallest !== idx) {
+      let temp = this.data[idx];
+      this.data[idx] = this.data[smallest];
+      this.data[smallest] = temp;
+
       this.heapifyDown(smallest);
     }
   }
 
-  private heapifyUp(i: number) {
-    if (i === 0) {
+  private heapifyUp(idx: number): void {
+    if (idx === 0) {
       return;
     }
 
-    const parentIndex = this.getParent(i);
-    const parentValue = this.data[parentIndex];
+    const pIdx = this.getParentIndex(idx);
 
-    const itemValue = this.data[i];
-
-    if (parentValue > itemValue) {
-      this.data[i] = parentValue;
-      this.data[parentIndex] = itemValue;
-      this.heapifyUp(parentIndex);
+    if (this.data[pIdx] > this.data[idx]) {
+      const tmp = this.data[pIdx];
+      this.data[pIdx] = this.data[idx];
+      this.data[idx] = tmp;
+      this.heapifyUp(pIdx);
     }
   }
 
-  private getParent(i: number): number {
-    return Math.floor((i - 1) / 2);
+  private getParentIndex(idx: number): number {
+    return Math.floor((idx - 1) / 2);
   }
 
-  private getLeftChild(i: number): number {
-    return i * 2 + 1;
+  private getLeftChildIndex(idx: number): number {
+    return 2 * idx + 1;
   }
 
-  private getRightChild(i: number): number {
-    return i * 2 + 2;
+  private getRightChildIndex(idx: number): number {
+    return 2 * idx + 2;
   }
 }

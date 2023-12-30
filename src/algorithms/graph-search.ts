@@ -49,3 +49,51 @@ export const bfs = (graph: number[][], source: number, needle: number) => {
 
   return [source].concat(out.reverse());
 };
+
+const walk = (
+  graph: WeightedAdjacencyList,
+  curr: number,
+  needle: number,
+  seen: boolean[],
+  path: number[]
+) => {
+  if (seen[curr]) {
+    return false;
+  }
+  seen[curr] = true;
+
+  path.push(curr);
+  if (curr === needle) {
+    return true;
+  }
+
+  const list = graph[curr];
+  for (let i = 0; i < list.length; i++) {
+    const edge = list[i];
+    if (walk(graph, edge.to, needle, seen, path)) {
+      return true;
+    }
+  }
+
+  path.pop();
+
+  return false;
+};
+
+export const dfs = (
+  graph: WeightedAdjacencyList,
+  source: number,
+  needle: number
+): number[] | null => {
+  const seen: boolean[] = new Array(graph.length).fill(false);
+  const path: number[] = [];
+
+  walk(graph, source, needle, seen, path);
+
+  if (path.length > 0) {
+    console.log(path);
+
+    return path;
+  }
+  return null;
+};

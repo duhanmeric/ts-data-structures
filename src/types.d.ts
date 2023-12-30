@@ -21,3 +21,6 @@ interface ILinkedList<T> {
   getLength(): number;
   get(index: number): T | undefined;
 }
+
+type GraphEdge = { to: number; weight: number };
+type WeightedAdjacencyList = GraphEdge[][];
